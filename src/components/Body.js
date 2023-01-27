@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import {IMG_CDN_URL, restaurantList} from './../Constant';
 import RestaurantCard from "./RestrauntCard";
 import Shimmer from './Shimmer';
+import { Link } from "react-router-dom";
 
 function filterData(searchText, restaurants) {
     return restaurants.filter((restaurant) => restaurant?.data?.name?.toLowerCase().includes(searchText.toLowerCase()))
@@ -22,7 +23,6 @@ const Body = () => {
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
         );
         const json = await data.json();
-        console.log(json);
         // Optional Chaining
         setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
         setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
@@ -61,7 +61,12 @@ const Body = () => {
             <div className="restaurant-list">
                 {
                     filteredRestaurants?.map((restaurant)=>(
-                    <RestaurantCard {... restaurant.data} key={restaurant.data.id} />
+                        <Link
+                            to={"/restaurant/" + restaurant.data.id}
+                            key={restaurant.data.id}
+                        >
+                            <RestaurantCard {...restaurant.data} />
+                        </Link>
                     ))
                 }
             </div>

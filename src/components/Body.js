@@ -35,7 +35,7 @@ const Body = () => {
         return <h1>No Restraunt match your Filter!!</h1>;
 
     return allRestaurants?.length === 0 ? (
-    <Shimmer />
+        <Shimmer />
     ) : (
             <>
            <input

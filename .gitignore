@@ -7,3 +7,4 @@
 /.parcel-cache
 /dist
 dist/
+/coverage
